@@ -25,7 +25,9 @@
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:onClick="@{()-> viewModel.onItemClick(position)}"
+        >
 
         <ImageView
             android:layout_width="48dp"
@@ -46,6 +48,7 @@
             android:paddingEnd="32dp"
             android:textColor="@{AppMode.INSTANCE.content}"
             android:text="@{viewModel.getUserName(position)}"
+            android:onClick="@{()-> viewModel.onTextClick(position)}"
             android:textSize="16dp"
             tools:text="Test" />
     </LinearLayout>

@@ -2,7 +2,9 @@ package com.dhl.example.user.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dhl.example.user.vm.UserViewModel
 import com.dhl.uimode.R
@@ -25,5 +27,13 @@ class UserActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityUserBinding>(this,R.layout.activity_user)
         binding.userViewModel = userViewModel
         userViewModel.getUsers()
+        userViewModel.selectedItem.observe(this, Observer {
+            Toast.makeText(this,it.login+"被点击了",Toast.LENGTH_LONG).show()
+        })
+
+        userViewModel.selectedText.observe(this, Observer {
+            Toast.makeText(this,it.login+"被点击了 Text",Toast.LENGTH_LONG).show()
+        })
+
     }
 }
