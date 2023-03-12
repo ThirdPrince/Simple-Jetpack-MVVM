@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.dhl.example.dogs.DogBreedsActivity
+import com.dhl.example.user.ui.UserActivity
 import com.dhl.uimode.databinding.ActivityMainBinding
 
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 //            binding.image.colorFilter = grayColorFilter // 如果想恢复彩色显示，设置为null即可
         }
         binding.btn.setOnClickListener {
-            val intent = Intent(this, DogBreedsActivity::class.java)
+            val intent = Intent(this, UserActivity::class.java)
             startActivity(intent)
         }
 
