@@ -15,47 +15,46 @@ import com.dhl.uimode.databinding.UserItemBinding
  * Adapter
  * @author dhl
  */
-class UserAdapter(val userViewModel: UserViewModel): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(val userViewModel: UserViewModel) :
+    RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
 
-
-
-
-
-     class ViewHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
-         private  val TAG = "ViewHolder"
+    class ViewHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val TAG = "ViewHolder"
         fun bind(viewModel: UserViewModel, position: Int?) {
             binding.position = position
             binding.viewModel = viewModel
-            Log.e(TAG,"pos = $position")
+            Log.e(TAG, "pos = $position")
 
         }
     }
 
-     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-         val layoutInflater = LayoutInflater.from(parent.context)
-         val binding =
-             DataBindingUtil.inflate<UserItemBinding>(layoutInflater, R.layout.user_item, parent, false)
-         binding.lifecycleOwner = parent.context as LifecycleOwner
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding =
+            DataBindingUtil.inflate<UserItemBinding>(
+                layoutInflater,
+                R.layout.user_item,
+                parent,
+                false
+            )
+        binding.lifecycleOwner = parent.context as LifecycleOwner
 
-       return ViewHolder(binding)
-     }
+        return ViewHolder(binding)
+    }
 
-     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-         holder.bind(userViewModel!!, position)
-     }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(userViewModel!!, position)
+    }
 
-     override fun getItemCount(): Int {
+    override fun getItemCount(): Int {
         return userViewModel.userList.size
 
-     }
+    }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
 
-
-
-
- }
+}
