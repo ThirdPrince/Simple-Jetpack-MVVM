@@ -1,4 +1,4 @@
-package com.dhl.example.dogs.bindings;
+package com.dhl.example.user.bindings;
 
 import android.widget.ImageView;
 

@@ -1,4 +1,4 @@
-package com.dhl.example.user
+package com.dhl.example.net
 
 import User
 import android.os.UserManager

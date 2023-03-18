@@ -1,13 +1,10 @@
 package com.dhl.uimode
 
 import android.content.Intent
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
-import com.dhl.example.dogs.DogBreedsActivity
 import com.dhl.example.user.ui.UserActivity
 import com.dhl.uimode.databinding.ActivityMainBinding
 

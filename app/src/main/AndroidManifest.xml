@@ -20,7 +20,6 @@
             android:name="com.dhl.example.user.ui.UserActivity"
             android:exported="false" />
         <activity android:name=".SecActivity" />
-        <activity android:name="com.dhl.example.dogs.DogBreedsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

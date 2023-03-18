@@ -3,16 +3,11 @@ package com.dhl.example.user.adapter
 import User
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.dhl.example.dogs.model.DogBreed
-import com.dhl.example.dogs.viewmodel.DogBreedsViewModel
 import com.dhl.example.user.vm.UserViewModel
-import com.dhl.uimode.BR
 import com.dhl.uimode.R
 import com.dhl.uimode.databinding.UserItemBinding
 

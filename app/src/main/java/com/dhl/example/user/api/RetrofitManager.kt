@@ -1,6 +1,6 @@
 package com.dhl.example.user.api
 
-import com.dhl.example.user.GitHubService
+import com.dhl.example.net.GitHubService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
