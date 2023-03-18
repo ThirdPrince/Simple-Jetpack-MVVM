@@ -25,15 +25,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnDefault.setOnClickListener { AppMode.update(Mode.UIModelDefault) }
         binding.btnDay.setOnClickListener { AppMode.update(Mode.UIModeDay)
 
-           // binding.image.colorFilter = null // 如果想恢复彩色显示，设置为null即可
         }
         binding.btnNight.setOnClickListener {
             AppMode.update(Mode.UIModeNight)
-//            val cm = ColorMatrix()
-//            cm.setSaturation(0f) // 设置饱和度
-//
-//            val grayColorFilter = ColorMatrixColorFilter(cm)
-//            binding.image.colorFilter = grayColorFilter // 如果想恢复彩色显示，设置为null即可
         }
         binding.btn.setOnClickListener {
             val intent = Intent(this, UserActivity::class.java)

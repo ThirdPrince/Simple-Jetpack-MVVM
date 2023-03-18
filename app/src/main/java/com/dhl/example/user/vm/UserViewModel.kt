@@ -1,13 +1,15 @@
 package com.dhl.example.user.vm
 
 import User
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dhl.example.dogs.model.DogBreed
 import com.dhl.example.user.adapter.UserAdapter
 import com.dhl.example.user.api.RetrofitManager
+import com.dhl.uimode.AppMode
+import com.dhl.uimode.Mode
 import kotlinx.coroutines.launch
 
 /**
@@ -17,9 +19,22 @@ import kotlinx.coroutines.launch
  */
 class UserViewModel : ViewModel() {
 
-    private val liveDataUser = MutableLiveData<List<User>>()
+    private  val TAG = "UserViewModel"
 
-    private val useList = mutableListOf<User>()
+    val userList = mutableListOf<User>()
+
+    private val _liveDataUser = MutableLiveData<List<User>>()
+
+    val liveDataUser: LiveData<List<User>>
+        get() = _liveDataUser
+
+    private val _liveDataLoading = MutableLiveData<Boolean>()
+
+    val liveDataLoading: LiveData<Boolean>
+        get() = _liveDataLoading
+
+
+
 
     /**
      * 点击事件
@@ -33,14 +48,16 @@ class UserViewModel : ViewModel() {
     private val adapter = UserAdapter(this)
 
     init {
-        adapter.setUsers(useList)
+        _liveDataLoading.value = true
     }
 
     fun getUsers(): LiveData<List<User>> {
 
         viewModelScope.launch {
             val response = RetrofitManager.gitHubService.getUsers()
-            liveDataUser.value = response
+            _liveDataUser.value = response
+            userList.clear()
+            userList.addAll(response)
             refreshList(response)
         }
 
@@ -48,7 +65,8 @@ class UserViewModel : ViewModel() {
     }
 
     private fun refreshList(users:List<User>){
-        useList.addAll(users)
+        Log.e(TAG,"user--${users.toString()}")
+        _liveDataLoading.value = false
         adapter.notifyDataSetChanged()
     }
 
@@ -63,8 +81,19 @@ class UserViewModel : ViewModel() {
         selectedText.value = user
     }
 
+    fun onFbClick() {
+
+        //AppMode.update(Mode.UIModeNight)
+        if(AppMode.currentMode == Mode.UIModeNight ){
+            AppMode.update(Mode.UIModeDay)
+        }else{
+            AppMode.update(Mode.UIModeNight)
+        }
+
+    }
+
     private fun getUserByIndex(index: Int): User {
-        return liveDataUser.value!![index]
+        return userList[index]
     }
 
     fun getUserAdapter(): UserAdapter {

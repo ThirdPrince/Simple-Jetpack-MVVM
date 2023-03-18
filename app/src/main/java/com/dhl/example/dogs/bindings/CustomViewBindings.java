@@ -5,12 +5,31 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.bumptech.glide.Glide;
 import com.dhl.uimode.R;
 
 public class CustomViewBindings {
+
+
+    @BindingAdapter("setRefresh")
+    public static void bindRefresh(SwipeRefreshLayout swipeRefreshLayout,boolean refresh) {
+        swipeRefreshLayout.setRefreshing(refresh);
+
+    }
     @BindingAdapter("setAdapter")
     public static void bindRecyclerViewAdapter(RecyclerView recyclerView, RecyclerView.Adapter<?> adapter) {
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        /**
+         * 要和
+         * override fun getItemId(position: Int): Long {
+         *         return position.toLong()
+         *     }
+         *     搭配使用
+         */
+        adapter.setHasStableIds(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(adapter);

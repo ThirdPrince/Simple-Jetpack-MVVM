@@ -5,6 +5,7 @@
 
     <data>
 
+
         <variable
             name="position"
             type="java.lang.Integer" />
@@ -26,6 +27,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
         android:paddingBottom="16dp"
+        app:background="@{AppMode.INSTANCE.background}"
         android:onClick="@{()-> viewModel.onItemClick(position)}"
         >
 

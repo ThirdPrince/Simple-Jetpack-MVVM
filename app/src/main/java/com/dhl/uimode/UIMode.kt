@@ -6,6 +6,8 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
@@ -16,13 +18,14 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 /**
  * @Title: $
  * @Package $
  * @Description: $(用一句话描述)
- * @author $
+ * @author dhl
  * @date $
  * @version V1.0
  */
@@ -44,6 +47,8 @@ object AppMode{
     val background = MutableLiveData<ColorStateList>()
     val content = MutableLiveData<ColorStateList>()
     val nightMode = MutableLiveData<Boolean>()
+
+    var currentMode = Mode.UIModelDefault
     init {
         update(Mode.UIModelDefault)
     }
@@ -51,6 +56,7 @@ object AppMode{
         background.value = ColorStateList.valueOf(uiMode.background)
         content.value = ColorStateList.valueOf(uiMode.content)
         nightMode.value = uiMode.type == NIGHT
+        currentMode = uiMode
 
     }
 }
@@ -63,6 +69,7 @@ object ModeAdapter {
     @BindingAdapter("background")
     @JvmStatic
     fun adaptBackground(view: View, value: ColorStateList?) {
+        //Log.e("TAG","background value = ${value.toString()}")
         view.setBackgroundColor(Color.WHITE)
         view.backgroundTintList = value
     }
@@ -92,6 +99,17 @@ object ModeAdapter {
             view.colorFilter = null
         }
 
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    @BindingAdapter("fbbackground")
+    @JvmStatic
+    fun adaptFbBackground(fab: FloatingActionButton, value: ColorStateList?) {
+       // fab.backgroundTintList = value
+       // fab.setBackgroundColor(Color.WHITE)
+        fab.backgroundTintList = value
+        Log.e("TAG","fab value = ${value.toString()}")
     }
 
 

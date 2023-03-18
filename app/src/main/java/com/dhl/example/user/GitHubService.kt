@@ -11,8 +11,7 @@ import retrofit2.http.GET
  */
 interface GitHubService {
 
-
      @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
-     suspend fun getUsers():List<User>
+     suspend fun getUsers():MutableList<User>
 
 }

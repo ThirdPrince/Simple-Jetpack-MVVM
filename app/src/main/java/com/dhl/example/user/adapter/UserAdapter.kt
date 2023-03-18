@@ -1,6 +1,7 @@
 package com.dhl.example.user.adapter
 
 import User
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,22 +18,22 @@ import com.dhl.uimode.databinding.UserItemBinding
 
 /**
  * Adapter
+ * @author dhl
  */
 class UserAdapter(val userViewModel: UserViewModel): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
 
-    private var users: List<User>  = mutableListOf()
 
 
-    fun setUsers(users: List<User>) {
-        this.users = users
-        notifyDataSetChanged()
-    }
-     class ViewHolder(val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
+
+     class ViewHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+         private  val TAG = "ViewHolder"
         fun bind(viewModel: UserViewModel, position: Int?) {
             binding.position = position
             binding.viewModel = viewModel
+            Log.e(TAG,"pos = $position")
+
         }
     }
 
@@ -50,7 +51,16 @@ class UserAdapter(val userViewModel: UserViewModel): RecyclerView.Adapter<UserAd
      }
 
      override fun getItemCount(): Int {
-        return users!!.size
+        return userViewModel.userList.size
+
      }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+
+
+
 
  }

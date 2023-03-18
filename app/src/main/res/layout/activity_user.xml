@@ -8,18 +8,52 @@
         <variable
             name="userViewModel"
             type="com.dhl.example.user.vm.UserViewModel" />
+
+        <variable
+            name="appmode"
+            type="com.dhl.uimode.AppMode" />
+
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.dhl.example.user.ui.UserActivity">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            setAdapter="@{userViewModel.userAdapter}"
-            />
+            tools:context="com.dhl.example.user.ui.UserActivity">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/colorPrimary"
+                setRefresh="@{userViewModel.liveDataLoading.booleanValue()}"
+
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    setAdapter="@{userViewModel.userAdapter}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="16dp"
+            app:fbbackground="@{appmode.INSTANCE.content}"
+            android:onClick="@{()->userViewModel.onFbClick()}"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
+    </FrameLayout>
+
 </layout>

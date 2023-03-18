@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UIMode">
         <activity
+            android:name="com.dhl.example.user.ui.Test"
+            android:exported="false"
+            android:label="@string/title_activity_test"
+            android:theme="@style/Theme.UIMode.NoActionBar" />
+        <activity
             android:name="com.dhl.example.user.ui.UserActivity"
             android:exported="false" />
         <activity android:name=".SecActivity" />
