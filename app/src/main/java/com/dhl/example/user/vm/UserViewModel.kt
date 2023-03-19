@@ -2,15 +2,18 @@ package com.dhl.example.user.vm
 
 import User
 import android.util.Log
+import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dhl.example.user.adapter.DynamicChangeCallBack
 import com.dhl.example.user.adapter.UserAdapter
 import com.dhl.example.user.api.RetrofitManager
 import com.dhl.uimode.AppMode
 import com.dhl.uimode.Mode
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * business logic for user
@@ -21,7 +24,11 @@ class UserViewModel : ViewModel() {
 
     private  val TAG = "UserViewModel"
 
-    val userList = mutableListOf<User>()
+   // val userList = mutableListOf<User>()
+
+     val userObservableArrayList = ObservableArrayList<User>()
+
+
 
     private val _liveDataUser = MutableLiveData<List<User>>()
 
@@ -49,6 +56,8 @@ class UserViewModel : ViewModel() {
 
     init {
         _liveDataLoading.value = true
+
+        userObservableArrayList.addOnListChangedCallback(DynamicChangeCallBack<User>(adapter))
     }
 
     fun getUsers(): LiveData<List<User>> {
@@ -56,8 +65,20 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             val response = RetrofitManager.gitHubService.getUsers()
             _liveDataUser.value = response
-            userList.clear()
-            userList.addAll(response)
+            userObservableArrayList.clear()
+            userObservableArrayList.addAll(response)
+            refreshList(response)
+        }
+
+        return liveDataUser
+    }
+
+    fun getUsersMore(): LiveData<List<User>> {
+
+        viewModelScope.launch {
+            val response = RetrofitManager.gitHubService.getUsers()
+            _liveDataUser.value = response
+            userObservableArrayList.addAll(response)
             refreshList(response)
         }
 
@@ -67,7 +88,7 @@ class UserViewModel : ViewModel() {
     private fun refreshList(users:List<User>){
         Log.e(TAG,"user--${users.toString()}")
         _liveDataLoading.value = false
-        adapter.notifyDataSetChanged()
+
     }
 
     fun onItemClick(index: Int) {
@@ -93,7 +114,7 @@ class UserViewModel : ViewModel() {
     }
 
     private fun getUserByIndex(index: Int): User {
-        return userList[index]
+        return userObservableArrayList[index]
     }
 
     fun getUserAdapter(): UserAdapter {

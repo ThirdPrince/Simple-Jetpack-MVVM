@@ -35,6 +35,7 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
         binding.refresh.isRefreshing = true
         userViewModel.selectedItem.observe(this, Observer {
             Toast.makeText(this,it.login+"被点击了",Toast.LENGTH_LONG).show()
+            userViewModel.getUsersMore()
         })
 
         userViewModel.selectedText.observe(this, Observer {

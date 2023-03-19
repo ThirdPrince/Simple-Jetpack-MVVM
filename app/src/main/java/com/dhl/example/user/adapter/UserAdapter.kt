@@ -48,7 +48,7 @@ class UserAdapter(val userViewModel: UserViewModel) :
     }
 
     override fun getItemCount(): Int {
-        return userViewModel.userList.size
+        return userViewModel.userObservableArrayList.size
 
     }
 
