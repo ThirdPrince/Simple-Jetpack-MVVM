@@ -25,21 +25,21 @@
             tools:context="com.dhl.example.user.ui.UserActivity">
 
 
-
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/refresh"
+                setRefresh="@{userViewModel.liveDataLoading.booleanValue()}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:swipeRefreshLayoutProgressSpinnerBackgroundColor="@color/colorPrimary"
-                setRefresh="@{userViewModel.liveDataLoading.booleanValue()}"
 
                 >
+
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy"
                     setAdapter="@{userViewModel.userAdapter}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -51,8 +51,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/fab_margin"
             android:layout_marginBottom="16dp"
-            app:fbbackground="@{appmode.INSTANCE.content}"
             android:onClick="@{()->userViewModel.onFbClick()}"
+            app:fbbackground="@{appmode.INSTANCE.content}"
             app:srcCompat="@android:drawable/ic_dialog_email" />
     </FrameLayout>
 

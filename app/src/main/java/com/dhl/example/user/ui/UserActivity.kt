@@ -1,12 +1,13 @@
 package com.dhl.example.user.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dhl.example.user.vm.UserViewModel
 import com.dhl.uimode.R
@@ -30,9 +31,24 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
         val binding = DataBindingUtil.setContentView<ActivityUserBinding>(this,R.layout.activity_user)
         binding.lifecycleOwner = this
         binding.userViewModel = userViewModel
+        val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        binding.rcy.addItemDecoration(decoration)
         binding.refresh.setOnRefreshListener(this)
         userViewModel.getUsers()
         binding.refresh.isRefreshing = true
+        onClickEvent()
+
+    }
+
+    override fun onRefresh() {
+        Log.e(TAG,"onRefresh")
+        userViewModel.getUsers()
+    }
+
+    /**
+     * 点击事件
+     */
+    private fun onClickEvent(){
         userViewModel.selectedItem.observe(this, Observer {
             Toast.makeText(this,it.login+"被点击了",Toast.LENGTH_LONG).show()
             userViewModel.getUsersMore()
@@ -42,10 +58,5 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
             Toast.makeText(this,it.login+"被点击了 Text",Toast.LENGTH_LONG).show()
         })
 
-    }
-
-    override fun onRefresh() {
-        Log.e(TAG,"onRefresh")
-        userViewModel.getUsers()
     }
 }

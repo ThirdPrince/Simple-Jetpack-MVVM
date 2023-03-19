@@ -33,6 +33,7 @@ public class CustomViewBindings {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(adapter);
+
     }
 
     @BindingAdapter("imageUrl")

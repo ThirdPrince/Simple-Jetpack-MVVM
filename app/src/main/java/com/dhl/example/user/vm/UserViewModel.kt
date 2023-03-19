@@ -22,13 +22,10 @@ import java.util.*
  */
 class UserViewModel : ViewModel() {
 
-    private  val TAG = "UserViewModel"
-
-   // val userList = mutableListOf<User>()
-
-     val userObservableArrayList = ObservableArrayList<User>()
+    private val TAG = "UserViewModel"
 
 
+    val userObservableArrayList = ObservableArrayList<User>()
 
     private val _liveDataUser = MutableLiveData<List<User>>()
 
@@ -39,8 +36,6 @@ class UserViewModel : ViewModel() {
 
     val liveDataLoading: LiveData<Boolean>
         get() = _liveDataLoading
-
-
 
 
     /**
@@ -73,6 +68,9 @@ class UserViewModel : ViewModel() {
         return liveDataUser
     }
 
+    /**
+     * just Test
+     */
     fun getUsersMore(): LiveData<List<User>> {
 
         viewModelScope.launch {
@@ -85,8 +83,8 @@ class UserViewModel : ViewModel() {
         return liveDataUser
     }
 
-    private fun refreshList(users:List<User>){
-        Log.e(TAG,"user--${users.toString()}")
+    private fun refreshList(users: List<User>) {
+        Log.e(TAG, "user--${users.toString()}")
         _liveDataLoading.value = false
 
     }
@@ -102,12 +100,14 @@ class UserViewModel : ViewModel() {
         selectedText.value = user
     }
 
+    /**
+     * 点击Fb 更新主题颜色
+     */
     fun onFbClick() {
 
-        //AppMode.update(Mode.UIModeNight)
-        if(AppMode.currentMode == Mode.UIModeNight ){
+        if (AppMode.currentMode == Mode.UIModeNight) {
             AppMode.update(Mode.UIModeDay)
-        }else{
+        } else {
             AppMode.update(Mode.UIModeNight)
         }
 
