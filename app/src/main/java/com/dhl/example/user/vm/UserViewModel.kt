@@ -12,6 +12,7 @@ import com.dhl.example.user.adapter.UserAdapter
 import com.dhl.example.user.api.RetrofitManager
 import com.dhl.uimode.AppMode
 import com.dhl.uimode.Mode
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -37,7 +38,10 @@ class UserViewModel : ViewModel() {
     val liveDataLoading: LiveData<Boolean>
         get() = _liveDataLoading
 
+    private val _error = MutableLiveData<String>()
 
+    val error: LiveData<String>
+        get() = _error
     /**
      * 点击事件
      */
@@ -55,9 +59,17 @@ class UserViewModel : ViewModel() {
         userObservableArrayList.addOnListChangedCallback(DynamicChangeCallBack<User>(adapter))
     }
 
+    private val exception = CoroutineExceptionHandler { _, throwable ->
+        _error.value = throwable.message
+        _liveDataLoading.value = false
+        Log.e(TAG, throwable.message!!)
+    }
+    /**
+     * 获取User
+     */
     fun getUsers(): LiveData<List<User>> {
 
-        viewModelScope.launch {
+        viewModelScope.launch(exception) {
             val response = RetrofitManager.gitHubService.getUsers()
             _liveDataUser.value = response
             userObservableArrayList.clear()
@@ -73,7 +85,7 @@ class UserViewModel : ViewModel() {
      */
     fun getUsersMore(): LiveData<List<User>> {
 
-        viewModelScope.launch {
+        viewModelScope.launch(exception) {
             val response = RetrofitManager.gitHubService.getUsers()
             _liveDataUser.value = response
             userObservableArrayList.addAll(response)
@@ -84,7 +96,6 @@ class UserViewModel : ViewModel() {
     }
 
     private fun refreshList(users: List<User>) {
-        Log.e(TAG, "user--${users.toString()}")
         _liveDataLoading.value = false
 
     }

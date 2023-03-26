@@ -23,34 +23,32 @@
         android:background="@drawable/list_item_bg"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{()-> viewModel.onItemClick(position)}"
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
         android:paddingBottom="16dp"
-        app:background="@{AppMode.INSTANCE.background}"
-        android:onClick="@{()-> viewModel.onItemClick(position)}"
-        >
+        app:background="@{AppMode.INSTANCE.background}">
 
         <ImageView
+            imageUrl="@{viewModel.getUserUrl(position)}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/list_item_image_border"
             android:scaleType="centerCrop"
-            app:imageNight="@{AppMode.INSTANCE.nightMode}"
-            imageUrl="@{viewModel.getUserUrl(position)}"
-           />
+            app:imageNight="@{AppMode.INSTANCE.nightMode}" />
 
         <TextView
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:onClick="@{()-> viewModel.onTextClick(position)}"
             android:orientation="vertical"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:textColor="@{AppMode.INSTANCE.content}"
             android:text="@{viewModel.getUserName(position)}"
-            android:onClick="@{()-> viewModel.onTextClick(position)}"
+            android:textColor="@{AppMode.INSTANCE.content}"
             android:textSize="16dp"
             tools:text="Test" />
     </LinearLayout>

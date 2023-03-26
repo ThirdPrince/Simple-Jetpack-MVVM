@@ -37,7 +37,14 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
         userViewModel.getUsers()
         binding.refresh.isRefreshing = true
         onClickEvent()
+        observerError()
 
+    }
+
+    private fun observerError(){
+        userViewModel.error.observe(this, Observer {
+            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+        })
     }
 
     override fun onRefresh() {
