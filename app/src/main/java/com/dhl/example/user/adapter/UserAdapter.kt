@@ -1,6 +1,5 @@
 package com.dhl.example.user.adapter
 
-import User
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,6 +23,8 @@ class UserAdapter(val userViewModel: UserViewModel) :
         fun bind(viewModel: UserViewModel, position: Int?) {
             binding.position = position
             binding.viewModel = viewModel
+           // val user = User("dhl",111,"sjd")
+           // binding.user = user
             Log.e(TAG, "pos = $position")
 
         }

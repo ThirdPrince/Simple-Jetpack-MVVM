@@ -1,6 +1,6 @@
 package com.dhl.example.user.vm
 
-import User
+import com.dhl.example.model.User
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LiveData
@@ -14,7 +14,6 @@ import com.dhl.uimode.AppMode
 import com.dhl.uimode.Mode
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
-import java.util.*
 
 /**
  * business logic for user
@@ -24,6 +23,8 @@ import java.util.*
 class UserViewModel : ViewModel() {
 
     private val TAG = "UserViewModel"
+
+    val user = User("chaile",99999,"url")
 
 
     val userObservableArrayList = ObservableArrayList<User>()
@@ -124,7 +125,7 @@ class UserViewModel : ViewModel() {
 
     }
 
-    private fun getUserByIndex(index: Int): User {
+     fun getUserByIndex(index: Int): User {
         return userObservableArrayList[index]
     }
 

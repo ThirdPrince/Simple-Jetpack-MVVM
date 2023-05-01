@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/list_item_bg.xml" value="0.11944444444444445" />
+        <entry key="app/src/main/res/drawable/my_ripple.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dog_breeds.xml" value="0.1852355072463768" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.21739130434782608" />

@@ -11,6 +11,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.dhl.uimode.R;
 
+/**
+ * 自定义BindingAdapter
+ * @author dhl
+ */
 public class CustomViewBindings {
 
 

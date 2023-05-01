@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
@@ -24,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 /**
  * @Title: $
  * @Package $
- * @Description: $(用一句话描述)
+ * @Description: 动态修改主题颜色
  * @author dhl
  * @date $
  * @version V1.0
@@ -50,7 +51,7 @@ object AppMode{
 
     var currentMode = Mode.UIModelDefault
     init {
-        update(Mode.UIModelDefault)
+        update(Mode.UIModeDay)
     }
     fun update(uiMode: UIMode) {
         background.value = ColorStateList.valueOf(uiMode.background)

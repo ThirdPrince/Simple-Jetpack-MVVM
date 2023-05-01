@@ -13,6 +13,8 @@
             name="appmode"
             type="com.dhl.uimode.AppMode" />
 
+
+
     </data>
 
     <FrameLayout
@@ -23,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="com.dhl.example.user.ui.UserActivity">
-
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/refresh"
@@ -37,8 +38,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy"
                     setAdapter="@{userViewModel.userAdapter}"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    app:background="@{appmode.INSTANCE.background}"
+                    />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
