@@ -30,7 +30,7 @@
        >
 
         <ImageView
-            imageUrl="@{viewModel.getUserUrl(position)}"
+            imageUrl="@{viewModel.getUserByIndex(position).avatar_url}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/list_item_image_border"

@@ -11,7 +11,7 @@ interface GitHubService {
      @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
      suspend fun getUsers():MutableList<User>
 
-     @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
-     suspend fun getUsers2():MutableList<User2>
+//     @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
+//     suspend fun getUsers2():MutableList<User2>
 
 }

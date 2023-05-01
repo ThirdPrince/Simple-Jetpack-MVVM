@@ -134,13 +134,7 @@ class UserViewModel : ViewModel() {
     }
 
 
-    fun getUserName(index: Int): String {
-        return getUserByIndex(index).login
-    }
 
-    fun getUserUrl(index: Int): String {
-        return getUserByIndex(index).avatar_url
-    }
 
 
 }
