@@ -3,8 +3,8 @@
 这是一个使用 Kotlin 协程和 Jetpack 组件开发的 Android 应用程序。
 
 ## 介绍
-
 MVVM 架构图：
+
 <img src="screenshots/2.png" height="480">
 
 该应用程序使用了以下 Jetpack 组件：
@@ -37,7 +37,7 @@ MVVM 架构图：
 
 ## 作者
 
-该项目由 [Your Name](https://github.com/yourusername) 创建和维护。
+该项目由 [ThirdPrince](https://github.com/ThirdPrince) 创建和维护。
 
 ## 许可证
 
