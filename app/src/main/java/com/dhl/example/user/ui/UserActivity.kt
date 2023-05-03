@@ -28,6 +28,13 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        initData()
+    }
+
+    /**
+     * 数据初始化
+     */
+    private  fun initData(){
         val binding = DataBindingUtil.setContentView<ActivityUserBinding>(this,R.layout.activity_user)
         binding.lifecycleOwner = this
         binding.userViewModel = userViewModel
@@ -41,6 +48,10 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
 
     }
 
+
+    /**
+     * 网络异常
+     */
     private fun observerError(){
         userViewModel.error.observe(this, Observer {
             Toast.makeText(this,it,Toast.LENGTH_LONG).show()
