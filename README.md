@@ -1,6 +1,6 @@
 ## Jetpack MVVM + Kotlin + Coroutine
 
-这是一个使用 Kotlin 协程和 Jetpack 组件开发的 Android 应用程序。
+这是一个使用 Kotlin 协程和 Jetpack MVVM 组件开发的 Android 应用程序。
 
 ## 介绍
 MVVM 架构图：
@@ -34,6 +34,9 @@ MVVM 架构图：
 2. 在 Android Studio 中打开项目。
 3. 使用 Android Studio 中的 AVD Manager 创建一个模拟器。
 4. 点击 "Run" 按钮，选择模拟器并运行应用程序。
+
+## demo
+<img src="screenshots/1.gif?raw=true" height="480">
 
 ## 作者
 
