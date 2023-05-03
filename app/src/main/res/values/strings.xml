@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jetpack_mvvm</string>
+    <string name="app_name">Simple_Jetpack_mvvm</string>
     <string name="title_activity_test">Test</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
