@@ -8,7 +8,7 @@ import retrofit2.http.GET
  */
 interface GitHubService {
 
-     @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
+     @GET("/repos/ThirdPrince/VanGogh/stargazers")
      suspend fun getUsers():MutableList<User>
 
 //     @GET("/repos/enbandari/Kotlin-Tutorials/stargazers")
