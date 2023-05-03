@@ -10,9 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name="com.dhl.example.app.MyApplication"
         android:theme="@style/Theme.UIMode">
 
-        <activity android:name="com.dhl.example.user.ui.UserActivity">
+        <activity android:name="com.dhl.example.user.ui.UserActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

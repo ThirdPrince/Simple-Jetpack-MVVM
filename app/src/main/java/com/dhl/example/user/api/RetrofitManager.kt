@@ -9,11 +9,13 @@ import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
 /**
- * Net
+ * RetrofitManager
+ * @author dhl
+ *
  */
 object RetrofitManager {
 
-    private val BASEURL = "https://api.github.com"
+    private const val BASEURL = "https://api.github.com"
 
 
     val gitHubService: GitHubService by lazy { retrofit.create(GitHubService::class.java) }

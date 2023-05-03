@@ -2,18 +2,22 @@ package com.dhl.example.user.vm
 
 import com.dhl.example.model.User
 import android.util.Log
+import android.view.Display
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dhl.example.dao.DbManager
 import com.dhl.example.user.adapter.DynamicChangeCallBack
 import com.dhl.example.user.adapter.UserAdapter
 import com.dhl.example.user.api.RetrofitManager
 import com.dhl.uimode.AppMode
 import com.dhl.uimode.Mode
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * business logic for user
@@ -24,14 +28,12 @@ class UserViewModel : ViewModel() {
 
     private val TAG = "UserViewModel"
 
-    val user = User("chaile",99999,"url")
-
 
     val userObservableArrayList = ObservableArrayList<User>()
 
     private val _liveDataUser = MutableLiveData<List<User>>()
 
-    val liveDataUser: LiveData<List<User>>
+    private val liveDataUser: LiveData<List<User>>
         get() = _liveDataUser
 
     private val _liveDataLoading = MutableLiveData<Boolean>()
@@ -43,6 +45,7 @@ class UserViewModel : ViewModel() {
 
     val error: LiveData<String>
         get() = _error
+
     /**
      * 点击事件
      */
@@ -65,21 +68,57 @@ class UserViewModel : ViewModel() {
         _liveDataLoading.value = false
         Log.e(TAG, throwable.message!!)
     }
+
     /**
      * 获取User
      */
     fun getUsers(): LiveData<List<User>> {
 
         viewModelScope.launch(exception) {
+            var users = getUsersFromDb()
+            userObservableArrayList.addAll(users)
             val response = RetrofitManager.gitHubService.getUsers()
             _liveDataUser.value = response
             userObservableArrayList.clear()
             userObservableArrayList.addAll(response)
+            if (response.size > 0) {
+                withContext(Dispatchers.IO) {
+                    val userDao = DbManager.db.userDao()
+                    userDao.deleteAll()
+                    userDao.insertAll(response)
+                }
+
+            }
             refreshList(response)
         }
 
         return liveDataUser
     }
+
+    fun getUsersByDb(): LiveData<List<User>> {
+
+        viewModelScope.launch(exception) {
+
+            var users = getUsersFromDb()
+            userObservableArrayList.addAll(users)
+            refreshList(users)
+        }
+
+        return liveDataUser
+    }
+
+    /**
+     * 异步查询数据库
+     */
+    private suspend fun getUsersFromDb(): List<User> {
+        var users: MutableList<User>
+        withContext(Dispatchers.IO) {
+            val userDao = DbManager.db.userDao()
+            users = userDao.getAll() as MutableList<User>
+        }
+        return users
+    }
+
 
     /**
      * just Test
@@ -125,16 +164,13 @@ class UserViewModel : ViewModel() {
 
     }
 
-     fun getUserByIndex(index: Int): User {
+    fun getUserByIndex(index: Int): User {
         return userObservableArrayList[index]
     }
 
     fun getUserAdapter(): UserAdapter {
         return adapter
     }
-
-
-
 
 
 }
