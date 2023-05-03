@@ -49,7 +49,7 @@ class UserActivity : AppCompatActivity() , SwipeRefreshLayout.OnRefreshListener{
 
     override fun onRefresh() {
         Log.e(TAG,"onRefresh")
-        userViewModel.getUsers()
+        userViewModel.getUsers(false)
     }
 
     /**

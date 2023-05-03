@@ -1,5 +1,6 @@
 package com.dhl.example.user.vm
 
+import android.nfc.Tag
 import com.dhl.example.model.User
 import android.util.Log
 import android.view.Display
@@ -72,24 +73,21 @@ class UserViewModel : ViewModel() {
     /**
      * 获取User
      */
-    fun getUsers(): LiveData<List<User>> {
+    fun getUsers(isLoadDb: Boolean = true): LiveData<List<User>> {
 
         viewModelScope.launch(exception) {
-            var users = getUsersFromDb()
-            userObservableArrayList.addAll(users)
+            if (isLoadDb) {
+                var users = getUsersFromDb()
+                userObservableArrayList.addAll(users)
+            }
             val response = RetrofitManager.gitHubService.getUsers()
             _liveDataUser.value = response
             userObservableArrayList.clear()
             userObservableArrayList.addAll(response)
-            if (response.size > 0) {
-                withContext(Dispatchers.IO) {
-                    val userDao = DbManager.db.userDao()
-                    userDao.deleteAll()
-                    userDao.insertAll(response)
-                }
-
-            }
+            Log.e(TAG, "刷新页面")
             refreshList(response)
+            insertDb(response)
+            Log.e(TAG, "操作数据完成")
         }
 
         return liveDataUser
@@ -117,6 +115,23 @@ class UserViewModel : ViewModel() {
             users = userDao.getAll() as MutableList<User>
         }
         return users
+    }
+
+    /**
+     * 更新数据库
+     */
+    private suspend fun insertDb(users: List<User>) {
+
+        if (users.isNotEmpty()) {
+            withContext(Dispatchers.IO) {
+                val userDao = DbManager.db.userDao()
+                userDao.deleteAll()
+                userDao.insertAll(users)
+                Log.e(TAG, "操作数据库")
+            }
+        }
+
+
     }
 
 

@@ -9,4 +9,9 @@ import androidx.room.PrimaryKey
  * @author dhl
  */
 @Entity(tableName = "user")
- data class User(@PrimaryKey(autoGenerate = true) val primaryKey:Long, val login:String,  @ColumnInfo(name = "user_id") val id:Long, val avatar_url:String)
+data class User(
+    @PrimaryKey(autoGenerate = true) val primaryKey: Long,
+    val login: String,
+    @ColumnInfo(name = "user_id") val id: Long,
+    val avatar_url: String
+)

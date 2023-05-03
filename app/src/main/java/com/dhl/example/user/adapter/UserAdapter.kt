@@ -13,19 +13,16 @@ import com.dhl.uimode.databinding.UserItemBinding
 /**
  * Adapter
  * @author dhl
+ * 数据交给ViewModel 处理
  */
-class UserAdapter(val userViewModel: UserViewModel) :
+class UserAdapter(private val userViewModel: UserViewModel) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
 
     class ViewHolder(private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val TAG = "ViewHolder"
         fun bind(viewModel: UserViewModel, position: Int?) {
             binding.position = position
             binding.viewModel = viewModel
-           // val user = User("dhl",111,"sjd")
-           // binding.user = user
-            Log.e(TAG, "pos = $position")
 
         }
     }
@@ -50,7 +47,6 @@ class UserAdapter(val userViewModel: UserViewModel) :
 
     override fun getItemCount(): Int {
         return userViewModel.userObservableArrayList.size
-
     }
 
     override fun getItemId(position: Int): Long {
